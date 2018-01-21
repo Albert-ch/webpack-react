@@ -5,7 +5,7 @@ module.exports = {
     output: {
         filename: 'index.js',
         path: path.resolve( __dirname, 'dist' ),
-        // publicPath: "temp/"
+        publicPath: "temp/"
     },
     devServer: {
         contentBase: './',
@@ -16,12 +16,16 @@ module.exports = {
     module:{
         loaders: [
             {
-                test: /\.js/,
+                test: /\.js$/,
                 exclude: /node_modules/,
                 loaders: 'babel-loader',
                 query: {
                     presets: ['es2015', 'react']
                 }
+            },
+            {
+                test: /.css$/,
+                loader: ['style-loader', 'css-loader']
             }
         ]
     }
