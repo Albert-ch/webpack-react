@@ -114,57 +114,159 @@ const element = React.createElement(
 // ReactDOM.render( <Toggle />, document.getElementById('app') )
 
 
-function LoginButton(props) {
-    return (
-        <button onClick={ props.onClick }> Login </button>
-    )
-}
-function LogoutButton(props) {
-    return (
-        <button onClick={ props.onClick }> Logout </button>
-    )
-}
-function UserGreeting() {
-    return <h1>Welcone back!</h1>
-}
-function GuestGreeting() {
-    return <h1>Please sign Up</h1>
-}
-function Greeting(props) {
-    const isLoggedIn = props.isLoggedIn;
-    if(isLoggedIn){
-        return <UserGreeting />
-    }
-    return <GuestGreeting />
-}
-class LoginControl extends React.Component{
+// function LoginButton(props) {
+//     return (
+//         <button onClick={ props.onClick }> Login </button>
+//     )
+// }
+// function LogoutButton(props) {
+//     return (
+//         <button onClick={ props.onClick }> Logout </button>
+//     )
+// }
+// function UserGreeting() {
+//     return <h1>Welcone back!</h1>
+// }
+// function GuestGreeting() {
+//     return <h1>Please sign Up</h1>
+// }
+// function Greeting(props) {
+//     const isLoggedIn = props.isLoggedIn;
+//     if(isLoggedIn){
+//         return <UserGreeting />
+//     }
+//     return <GuestGreeting />
+// }
+// class LoginControl extends React.Component{
+//     constructor(props){
+//         super(props)
+//         this.state = { isLoginIn: false }
+//         this.handleLoginClick = this.handleLoginClick.bind(this)
+//         this.handleLogoutClick = this.handleLogoutClick.bind(this)
+//     }
+//     handleLoginClick(){
+//         this.setState( {isLoginIn: true} )
+//     }
+//     handleLogoutClick(){
+//         this.setState( {isLoginIn: false} )
+//     }
+//
+//     render(){
+//         const isLoggedIn = this.state.isLoginIn;
+//         let button = null;
+//         if(isLoggedIn){
+//             button = <LogoutButton onClick={ this.handleLogoutClick  } />
+//         }else {
+//             button = <LoginButton onClick={ this.handleLoginClick  } />
+//         }
+//         return (
+//             <div>
+//                 <Greeting isLoggedIn={isLoggedIn} />
+//                 {button}
+//             </div>
+//         )
+//     }
+// }
+// ReactDOM.render( <LoginControl/>, document.getElementById("app") )
+
+
+
+// function Mailbox(props){
+//     const unreadMessages = props.unreadMessages;
+//     return (
+//         <div>
+//             <h1>Hello !</h1>
+//             { unreadMessages.length > 0 &&
+//                 <h2>
+//                     You have { unreadMessages.length } unread messages
+//                 </h2>
+//             }
+//         </div>
+//     )
+// }
+//
+// const message = ['one', 'two', 'three', 'four']
+// ReactDOM.render( <Mailbox unreadMessages={message} />, document.getElementById("app") )
+
+
+
+// function WarningBanner(props) {
+//     if(!props.warn) return null;
+//     return (
+//         <div>
+//             Warning
+//         </div>
+//     )
+//
+// }
+// class Page extends React.Component{
+//     constructor(props){
+//         super(props)
+//         this.state = {
+//             showWarning: false
+//         }
+//         this.handleClick = this.handleClick.bind(this)
+//     }
+//     handleClick(){
+//         this.setState( (prevState)=>({
+//             showWarning: !prevState.showWarning
+//         }) )
+//     }
+//     render(){
+//         return (
+//             <div>
+//                 <button onClick={this.handleClick}>
+//                     {this.state.showWarning ? 'Hide' : 'Show'}
+//                 </button>
+//                 <WarningBanner warn={this.state.showWarning} />
+//                 <span>{ [1,2,3,4,5,6,7] }</span>
+//             </div>
+//         )
+//     }
+// }
+// ReactDOM.render( <Page />, document.getElementById("app"))
+
+
+// function Numbers(props) {
+//     const numbers = props.numbers;
+//     return (
+//         <ul>
+//             {
+//                 numbers.map( number=> <li key={number + ''}>{number + 'for fun'}</li> )
+//             }
+//         </ul>
+//     )
+// }
+// ReactDOM.render( <Numbers numbers={ [1,2,3,4,5,6,7,8,9,0] } />, document.getElementById("app") )
+
+
+
+class EssayForm extends React.Component{
     constructor(props){
         super(props)
-        this.state = { isLoginIn: false }
-        this.handleLoginClick = this.handleLoginClick.bind(this)
-        this.handleLogoutClick = this.handleLogoutClick.bind(this)
-    }
-    handleLoginClick(){
-        this.setState( {isLoginIn: true} )
-    }
-    handleLogoutClick(){
-        this.setState( {isLoginIn: false} )
-    }
-
-    render(){
-        const isLoggedIn = this.state.isLoginIn;
-        let button = null;
-        if(isLoggedIn){
-            button = <LogoutButton onClick={ this.handleLogoutClick  } />
-        }else {
-            button = <LoginButton onClick={ this.handleLoginClick  } />
+        this.state = {
+            textVale: "Please write an essay about you favorite DOM element"
         }
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
+    handleChange(event){
+        this.setState( { textVale:event.target.value } )
+    }
+    handleSubmit(event){
+        alert(" An essay was subumitted: " + this.state.textVale)
+        event.preventDefault()
+    }
+    render(){
         return (
-            <div>
-                <Greeting isLoggedIn={isLoggedIn} />
-                {button}
-            </div>
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                    Name:
+                </label>
+                <textarea value={this.state.textVale} onChange={this.handleChange} />
+                <input type="submit" value="Submit"/>
+            </form>
         )
     }
 }
-ReactDOM.render( <LoginControl/>, document.getElementById("app") )
+ReactDOM.render( <EssayForm />, document.getElementById("app") )
